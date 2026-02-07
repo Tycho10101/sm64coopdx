@@ -6,7 +6,7 @@ on:
         branches: [ dev ]
 
 jobs:
-    build-linux:
+    build-linux-headless:
         if: ${{ github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[build]') }}
         runs-on: ubuntu-22.04
         steps:
@@ -19,7 +19,7 @@ jobs:
                 sudo apt install -y build-essential git python3 libglew-dev libsdl2-dev libz-dev libcurl4-openssl-dev zip
 
             - name: Build the game
-              run: make -j$(nproc)
+              run: make -j$(nproc) HEADLESS=1
 
             - name: Generate hash
               run: |
@@ -120,7 +120,7 @@ jobs:
                 name: sm64coopdx-windows-opengl
                 path: ./build/us_pc/sm64coopdx_Windows_OpenGL.zip
 
-    build-windows-directx:
+    build-windows-headless:
         if: ${{ github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[build]') }}
         runs-on: windows-latest
         defaults:
@@ -151,7 +151,7 @@ jobs:
                     zip
 
             - name: Build the game
-              run: make -j$(nproc) RENDER_API=D3D11 WINDOW_API=DXGI
+              run: make -j$(nproc) HEADLESS=1
 
             - name: Generate hash
               run: |
