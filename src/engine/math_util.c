@@ -4,6 +4,7 @@
 #include "engine/graph_node.h"
 #include "math_util.h"
 #include "surface_collision.h"
+#include <float.h>
 
 #include "trig_tables.inc.c"
 
